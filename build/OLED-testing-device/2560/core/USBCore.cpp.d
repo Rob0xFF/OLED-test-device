@@ -1,4 +1,4 @@
-/Users/Robert/MyArduinoProject/build/OLED-testing-device/2560/core/USBCore.cpp.o: \
+/Users/Robert/MyArduinoProject/OLED-test-device/build/OLED-testing-device/2560/core/USBCore.cpp.o: \
  /Users/Robert/Library/Arduino15/packages/MegaCore/hardware/avr/2.0.3/cores/MCUdude_corefiles/USBCore.cpp \
  /Users/Robert/Library/Arduino15/packages/MegaCore/hardware/avr/2.0.3/cores/MCUdude_corefiles/USBAPI.h \
  /Users/Robert/Library/Arduino15/packages/MegaCore/hardware/avr/2.0.3/cores/MCUdude_corefiles/Arduino.h \

@@ -1,4 +1,4 @@
-/Users/Robert/MyArduinoProject/build/OLED-testing-device/2560/core/main.cpp.o: \
+/Users/Robert/MyArduinoProject/OLED-test-device/build/OLED-testing-device/2560/core/main.cpp.o: \
  /Users/Robert/Library/Arduino15/packages/MegaCore/hardware/avr/2.0.3/cores/MCUdude_corefiles/main.cpp \
  /Users/Robert/Library/Arduino15/packages/MegaCore/hardware/avr/2.0.3/cores/MCUdude_corefiles/Arduino.h \
  /Users/Robert/Library/Arduino15/packages/MegaCore/hardware/avr/2.0.3/cores/MCUdude_corefiles/binary.h \
