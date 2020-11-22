@@ -8,3 +8,5 @@ bare-arduino.sublime-project
 CONTRIBUTING.md
 INSTALL.md
 README.md
+.ycm_extra_conf.py
+.editorconfig
