@@ -1,0 +1,22 @@
+/Users/Robert/MyArduinoProject/build/OLED-testing-device/2560/userlibs/3rdParty/SD/src/File.cpp.o: \
+ /Users/Robert/MyArduinoProject/lib/3rdParty/SD/src/File.cpp \
+ /Users/Robert/MyArduinoProject/lib/3rdParty/SD/src/SD.h \
+ /Users/Robert/Library/Arduino15/packages/MegaCore/hardware/avr/2.0.3/cores/MCUdude_corefiles/Arduino.h \
+ /Users/Robert/Library/Arduino15/packages/MegaCore/hardware/avr/2.0.3/cores/MCUdude_corefiles/binary.h \
+ /Users/Robert/Library/Arduino15/packages/MegaCore/hardware/avr/2.0.3/cores/MCUdude_corefiles/WCharacter.h \
+ /Users/Robert/Library/Arduino15/packages/MegaCore/hardware/avr/2.0.3/cores/MCUdude_corefiles/WString.h \
+ /Users/Robert/Library/Arduino15/packages/MegaCore/hardware/avr/2.0.3/cores/MCUdude_corefiles/HardwareSerial.h \
+ /Users/Robert/Library/Arduino15/packages/MegaCore/hardware/avr/2.0.3/cores/MCUdude_corefiles/Stream.h \
+ /Users/Robert/Library/Arduino15/packages/MegaCore/hardware/avr/2.0.3/cores/MCUdude_corefiles/Print.h \
+ /Users/Robert/Library/Arduino15/packages/MegaCore/hardware/avr/2.0.3/cores/MCUdude_corefiles/Printable.h \
+ /Users/Robert/Library/Arduino15/packages/MegaCore/hardware/avr/2.0.3/cores/MCUdude_corefiles/USBAPI.h \
+ /Users/Robert/Library/Arduino15/packages/MegaCore/hardware/avr/2.0.3/cores/MCUdude_corefiles/Arduino.h \
+ /Users/Robert/Library/Arduino15/packages/MegaCore/hardware/avr/2.0.3/cores/MCUdude_corefiles/wiring_extras.h \
+ /Users/Robert/Library/Arduino15/packages/MegaCore/hardware/avr/2.0.3/variants/100-pin-arduino-mega/pins_arduino.h \
+ /Users/Robert/MyArduinoProject/lib/3rdParty/SD/src/utility/SdFat.h \
+ /Users/Robert/MyArduinoProject/lib/3rdParty/SD/src/utility/Sd2Card.h \
+ /Users/Robert/MyArduinoProject/lib/3rdParty/SD/src/utility/Sd2PinMap.h \
+ /Users/Robert/MyArduinoProject/lib/3rdParty/SD/src/utility/SdInfo.h \
+ /Users/Robert/MyArduinoProject/lib/3rdParty/SD/src/utility/FatStructs.h \
+ /Users/Robert/Library/Arduino15/packages/MegaCore/hardware/avr/2.0.3/cores/MCUdude_corefiles/Print.h \
+ /Users/Robert/MyArduinoProject/lib/3rdParty/SD/src/utility/SdFatUtil.h
