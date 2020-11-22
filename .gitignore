@@ -1,2 +1,10 @@
 
 .DS_Store
+**/bin
+**/build
+**/script
+**/test
+bare-arduino.sublime-project
+CONTRIBUTING.md
+INSTALL.md
+README.md
