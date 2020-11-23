@@ -18,4 +18,4 @@ MemoryFree https://github.com/mpflaga/Arduino-MemoryFree
 
 TimerOne https://github.com/PaulStoffregen/TimerOne
 
-Because some of them have been slightly modified to fit this project and some of them may be in the furture, I maintain these libs here.
+Because some of them have been slightly modified to fit this project and some of them may be in the future, I maintain these libs here.
