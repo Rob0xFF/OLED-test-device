@@ -108,9 +108,9 @@ class rButton
     const float _increment;
     const uint8_t _myDir;
     const char * _unit;
-		const char * _format;
-		char _caption[10];
-		uint8_t _textWidth;
+    const char * _format;
+    char _caption[10];
+    uint8_t _textWidth;
 
 };
 

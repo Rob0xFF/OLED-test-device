@@ -195,10 +195,10 @@ float E52246::getVoltage(uint8_t channel)
 
 uint8_t E52246::getErrStatus(uint8_t channel)
 {
-	uint8_t _deratingFlag = readRegister8(ERROR_STATUS);
-	if (_deratingFlag & 1 << 1) {
-		return 3;	
-	}
+  uint8_t _deratingFlag = readRegister8(ERROR_STATUS);
+  if (_deratingFlag & 1 << 1) {
+    return 3;
+  }
   uint16_t _errFlag = readRegister16(LED_STATUS);
   // test for open condition first
   if (_errFlag & 1 << channel - 1) {

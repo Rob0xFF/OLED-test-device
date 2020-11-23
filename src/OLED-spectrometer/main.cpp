@@ -1,3 +1,4 @@
+#include <Arduino.h>
 #include "c12880.h"
 
 #define SPEC_TRG         A4
@@ -31,30 +32,83 @@ const long wavelengths[] PROGMEM = {
   83601, 83736, 83870, 84004, 84137, 84270, 84403, 84534, 84666, 84796, 84927, 85057, 85186, 85315, 85443, 85571, 85698, 85825,
   85951, 86077, 86202, 86327, 86452, 86576, 86699, 86823, 86945, 87067, 87189, 87310, 87431, 87552, 87672, 87791, 87911, 88029
 };
-
-void setup()
+int atexit(void ( * /*func*/ )())
 {
+  return 0;
+}
+
+void initVariant() __attribute__((weak));
+
+void initVariant() { }
+
+int main(void)
+{
+  init();
+  initVariant();
   Serial.begin(115200);
   Serial1.begin(115200);
   spec.begin();
-}
-
-void loop()
-{
-  if (Serial) {
-    if (Serial.available()) {
-      char readout = Serial.read();
+  for (;;) {
+    if (Serial) {
+      if (Serial.available()) {
+        char readout = Serial.read();
+        if (readout == 'H') {
+          Serial.println('S');
+        }
+        if (readout == 'T') {
+          unsigned long _startMillis = millis();
+          do {
+            if (Serial.available() >= 3) {
+              float readoutf;
+              readoutf = Serial.parseFloat();
+              spec.setIntegrationTime(readoutf);
+              Serial.println('S');
+              return;
+            }
+          } while (millis() - _startMillis < 100);
+        }
+        if (readout == 'A') {
+          unsigned long _startMillis = millis();
+          do {
+            if (Serial.available() >= 1) {
+              byte readoutf;
+              readoutf = Serial.read();
+              spec.setAveraging((uint8_t) readoutf);
+              Serial.println('S');
+              return;
+            }
+          } while (millis() - _startMillis < 100);
+        }
+        if (readout == 'C') {
+          spec.readInto(data);
+          Serial.println('S');
+        }
+        if (readout == 'G') {
+          Serial.println("lambda[nm] intensity[a.u.]");
+          for (uint16_t i = 0; i < C12880_NUM_CHANNELS; i++) {
+            long buf = pgm_read_dword(&(wavelengths[i]));
+            Serial.print((float) buf / 100.0f);
+            Serial.print(" ");
+            Serial.println(data[i]);
+          }
+        }
+      }
+    }
+    if (Serial1.available()) {
+      char readout = Serial1.read();
       if (readout == 'H') {
-        Serial.println('S');
+        Serial1.print('S');
       }
       if (readout == 'T') {
         unsigned long _startMillis = millis();
         do {
-          if (Serial.available() >= 3) {
-            float readoutf;
-            readoutf = Serial.parseFloat();
-            spec.setIntegrationTime(readoutf);
-            Serial.println('S');
+          if (Serial1.available() >= 4) {
+            byte readoutf[4];
+            Serial1.readBytes(readoutf, 4);
+            uint32_t newIntegTime;
+            newIntegTime = ((readoutf[3] & 0xFFFFFF) << 24 | (readoutf[2] & 0xFFFFFF) << 16 | (readoutf[1] & 0xFFFFFF) << 8 | (readoutf[0] & 0xFFFFFF));
+            spec.setIntegrationTime(*(float *) & newIntegTime);
+            Serial1.print('S');
             return;
           }
         } while (millis() - _startMillis < 100);
@@ -62,73 +116,28 @@ void loop()
       if (readout == 'A') {
         unsigned long _startMillis = millis();
         do {
-          if (Serial.available() >= 1) {
-            byte readoutf;
-            readoutf = Serial.read();
-            spec.setAveraging((uint8_t) readoutf);
-            Serial.println('S');
+          if (Serial1.available() >= 1) {
+            byte readoutf[1];
+            Serial1.readBytes(readoutf, 1);
+            spec.setAveraging((uint8_t) readoutf[0]);
+            Serial1.print('S');
             return;
           }
         } while (millis() - _startMillis < 100);
       }
       if (readout == 'C') {
         spec.readInto(data);
-        Serial.println('S');
+        next = 0;
+        Serial1.print('S');
       }
       if (readout == 'G') {
-        Serial.println("lambda[nm] intensity[a.u.]");
-        for (uint16_t i = 0; i < C12880_NUM_CHANNELS; i++) {
-          long buf = pgm_read_dword(&(wavelengths[i]));
-          Serial.print((float) buf / 100.0f);
-          Serial.print(" ");
-          Serial.println(data[i]);
+        Serial1.write((byte *) & data[next], 2);
+        Serial.println(data[next]);
+        next++;
+        if (next >= C12880_NUM_CHANNELS) {
+          next = 0;
         }
       }
     }
+    return 0;
   }
-  if (Serial1.available()) {
-    char readout = Serial1.read();
-    if (readout == 'H') {
-      Serial1.print('S');
-    }
-    if (readout == 'T') {
-      unsigned long _startMillis = millis();
-      do {
-        if (Serial1.available() >= 4) {
-          byte readoutf[4];
-          Serial1.readBytes(readoutf, 4);
-          uint32_t newIntegTime;
-          newIntegTime = ((readoutf[3] & 0xFFFFFF) << 24 | (readoutf[2] & 0xFFFFFF) << 16 | (readoutf[1] & 0xFFFFFF) << 8 | (readoutf[0] & 0xFFFFFF));
-          spec.setIntegrationTime(*(float *) & newIntegTime);
-          Serial1.print('S');
-          return;
-        }
-      } while (millis() - _startMillis < 100);
-    }
-    if (readout == 'A') {
-      unsigned long _startMillis = millis();
-      do {
-        if (Serial1.available() >= 1) {
-          byte readoutf[1];
-          Serial1.readBytes(readoutf, 1);
-          spec.setAveraging((uint8_t) readoutf[0]);
-          Serial1.print('S');
-          return;
-        }
-      } while (millis() - _startMillis < 100);
-    }
-    if (readout == 'C') {
-      spec.readInto(data);
-      next = 0;
-      Serial1.print('S');
-    }
-    if (readout == 'G') {
-      Serial1.write((byte *) & data[next], 2);
-      Serial.println(data[next]);
-      next++;
-      if (next >= C12880_NUM_CHANNELS) {
-        next = 0;
-      }
-    }
-  }
-}

@@ -162,7 +162,7 @@ void QuickTest::show(void)
   for (uint8_t i = 0; i < 6; i++) {
     Button[i].show();
   }
-	sPButton.setPoint = 1;
+  sPButton.setPoint = 1;
   sPButton.show();
   exitButton.show();
   startButton.show();
@@ -252,7 +252,7 @@ void Characteristic::show(void)
 {
   minButton.setPoint = 1;
   minButton.show();
-	maxButton.setPoint = 10;
+  maxButton.setPoint = 10;
   maxButton.show();
   exitButton.show();
   startButton.show();
@@ -272,8 +272,8 @@ void Characteristic::update()
           float temp = minButton.setPoint;
           minButton.setPoint = maxButton.setPoint;
           maxButton.setPoint = temp;
-					minButton.update();
-					maxButton.update();
+          minButton.update();
+          maxButton.update();
         }
         board.writeTimeToLog();
         board.writeToLog(F("Measurement started: OLED "));

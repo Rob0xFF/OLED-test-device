@@ -99,7 +99,7 @@ void rButton::show(void)
     board.TFT.print("-");
   }
   board.TFT.setTextSize(1);
-	_textWidth = snprintf(_caption, 10, _format, setPoint, _unit);
+  _textWidth = snprintf(_caption, 10, _format, setPoint, _unit);
   board.TFT.setCursor(_myX + _myWidth / 2 - 6 * _textWidth / 2, _myY + _myHeight / 2 - 4);
   board.TFT.print(_caption);
 }
@@ -110,7 +110,7 @@ void rButton::update(void)
   board.TFT.setTextColor(TFT_WHITE, TFT_OLIVE);
   board.TFT.fillRect(_myX + _myWidth / 2 - 6 * _textWidth / 2, _myY + _myHeight / 2 - 4, 6 * _textWidth, 8, TFT_OLIVE);
   board.TFT.setTextSize(1);
-	_textWidth = snprintf(_caption, 10, _format, setPoint, _unit);
+  _textWidth = snprintf(_caption, 10, _format, setPoint, _unit);
   board.TFT.setCursor(_myX + _myWidth / 2 - 6 * _textWidth / 2, _myY + _myHeight / 2 - 4);
   board.TFT.print(_caption);
 }

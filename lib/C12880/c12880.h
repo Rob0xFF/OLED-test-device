@@ -14,7 +14,8 @@
 
 #define C12880_NUM_CHANNELS 288
 
-class C12880 {
+class C12880
+{
 
   public:
 
@@ -28,7 +29,7 @@ class C12880 {
 
     void setAveraging(uint8_t av);
 
-    void readInto(uint16_t *buffer);
+    void readInto(uint16_t * buffer);
 
   private:
 
