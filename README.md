@@ -10,4 +10,4 @@ https://github.com/sudar/Arduino-Makefile
 
 Individual Makefiles are located besides the main.cpp files. 
 
-Additionally, we will need to manually add placement new to the respective core file. 
+Additionally, we will need to manually add placement new to the core files, because for some reason this is not included. 
