@@ -77,5 +77,6 @@ int main(void)
         setIdle();
       }
     }
-    return 0;
   }
+  return 0;
+}
