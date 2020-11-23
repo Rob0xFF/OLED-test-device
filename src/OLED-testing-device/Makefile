@@ -1,6 +1,6 @@
 PROJECT_DIR       = $(HOME)/MyArduinoProject/OLED-test-device
 
-ARDMK_DIR         = $(PROJECT_DIR)/Arduino-Makefile
+ARDMK_DIR         = $(PROJECT_DIR)/Makefile
 
 ARDUINO_DIR       = /Applications/Arduino.app/Contents/Java
 
