@@ -10,9 +10,7 @@ BOARD_TAG   = nano
 
 BOARD_SUB   = atmega328
 
-ARDUINO_LIB_PATH = $(HOME)/Documents/Arduino/libraries
-
-ARDUINO_DIR = /Applications/Arduino.app/Contents/Java
+#ARDUINO_LIB_PATH = $(HOME)/Documents/Arduino/libraries
 
 ARDUINO_LIBS = 3rdParty/MCP4725 3rdparty/BusIO Wire SPI
 

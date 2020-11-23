@@ -4,8 +4,6 @@ ARDMK_DIR         = $(PROJECT_DIR)/Makefile
 
 ARDUINO_DIR       = /Applications/Arduino.app/Contents/Java
 
-USER_LIB_PATH    :=  $(PROJECT_DIR)/lib
-
 ALTERNATE_CORE    = MegaCore
 
 BOARD_SUB         = ATmega2560
@@ -28,7 +26,9 @@ AVRDUDE_ARD_PROGRAMMER = arduino
 
 ARDUINO_LIB_PATH = $(HOME)/Library/Arduino15/packages/MegaCore/hardware/avr/2.0.3/libraries
 
-# Build owm libs
+USER_LIB_PATH    :=  $(PROJECT_DIR)/lib
+
+# Build user libs
 ARDUINO_LIBS = Board Display E522.46 Elements GUI Microscope OLED Screens Spectrometer Stepper TCA9548A 
 
 # Build 3rd party libs
