@@ -12,12 +12,12 @@ volatile uint8_t touched = false;
 
 
 #define IS_RELEASED false;
-void tsTouched() {
+void tsTouched()
+{
   if (counter == 0) {
     touchStart = millis();
     touched = true;
-  }
-  else {
+  } else {
     touchDuration = millis() - touchStart;
     if (touchDuration > maxTouchDuration) {
       counter = 0;
@@ -29,18 +29,21 @@ void tsTouched() {
 
 volatile uint8_t tick = true;
 #define TOCK false;
-void tickTock() {
+void tickTock()
+{
   tick = true;
 }
 
 volatile uint8_t fastTick = true;
 #define FASTTOCK false;
-void fastTickTock() {
+void fastTickTock()
+{
   fastTick = true;
 }
 
 // Declared weak in Arduino.h to allow user redefinitions.
-int atexit(void (* /*func*/ )()) {
+int atexit(void ( * /*func*/ )())
+{
   return 0;
 }
 
@@ -55,24 +58,18 @@ void initVariant() { }
 int main(void)
 {
   init();
-
   initVariant();
-
   Serial.begin(115200);
   myGUI.boot();
-
   // interupt on touchscreen event
   pinMode(FT6206_IRQ_PIN, INPUT);
   //attachInterrupt(FT6206_INT, tsTouched, FALLING);
   attachInterrupt(FT6206_INT, tsTouched, FALLING);
-
   // interrupt on external 1Hz clock signal
   pinMode(DS3231_INT_PIN, INPUT);
   attachInterrupt(DS3231_INT, tickTock, FALLING);
-
   Timer1.initialize(10000);
   Timer1.attachInterrupt(fastTickTock);
-
   for (;;) {
     if (tick) {
       myGUI.update();
@@ -96,6 +93,5 @@ int main(void)
       }
     }
   }
-
   return 0;
 }

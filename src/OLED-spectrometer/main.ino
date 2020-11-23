@@ -32,13 +32,15 @@ const long wavelengths[] PROGMEM = {
   85951, 86077, 86202, 86327, 86452, 86576, 86699, 86823, 86945, 87067, 87189, 87310, 87431, 87552, 87672, 87791, 87911, 88029
 };
 
-void setup() {
+void setup()
+{
   Serial.begin(115200);
   Serial1.begin(115200);
   spec.begin();
 }
 
-void loop() {
+void loop()
+{
   if (Serial) {
     if (Serial.available()) {
       char readout = Serial.read();
@@ -124,7 +126,9 @@ void loop() {
       Serial1.write((byte *) & data[next], 2);
       Serial.println(data[next]);
       next++;
-      if (next >= C12880_NUM_CHANNELS) next = 0;
+      if (next >= C12880_NUM_CHANNELS) {
+        next = 0;
+      }
     }
   }
 }
