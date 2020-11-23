@@ -26,13 +26,16 @@ AVRDUDE_ARD_BAUDRATE = 115200
 
 AVRDUDE_ARD_PROGRAMMER = arduino
 
-ARDUINO_LIB_PATH = $(HOME)/Documents/Arduino/libraries
+ARDUINO_LIB_PATH = $(HOME)/Library/Arduino15/packages/MegaCore/hardware/avr/2.0.3/libraries
 
+# Build owm libs
 ARDUINO_LIBS = Board Display E522.46 Elements GUI Microscope OLED Screens Spectrometer Stepper TCA9548A 
 
-ARDUINO_LIBS += 3rdParty/BH1750 3rdParty/DS3231 3rdParty/EEPROM 3rdParty/FT6206 3rdParty/HIH6130 3rdParty/ILI9341TFT 3rdParty/INA226 3rdParty/MemoryFree 3rdParty/SD 3rdParty/TimerOne
+# Build 3rd party libs
+ARDUINO_LIBS += 3rdParty/BH1750 3rdParty/DS3231 3rdParty/FT6206 3rdParty/HIH6130 3rdParty/ILI9341TFT 3rdParty/INA226 3rdParty/MemoryFree 3rdParty/TimerOne
 
-ARDUINO_LIBS += Wire SPI
+# Build Libs included in Core
+ARDUINO_LIBS += Wire SPI SD EEPROM
 
 OPTIMIZATION_LEVEL = s
 
