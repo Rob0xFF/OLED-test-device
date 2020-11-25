@@ -31,6 +31,7 @@ void E52246::begin(void)
     pinMode(_runPin, OUTPUT);
     digitalWrite(_runPin, LOW);
   }
+	writeRegister8(PWM_FREQ, 0x00);
 }
 
 void E52246::run(void)
