@@ -59,7 +59,7 @@ void E52246::enableChannel(uint8_t channel = 0)
   }
   uint8_t _channelsEnabled = readRegister8(SETUP_LED_ENABLE);
   if (channel) {
-    _channelsEnabled |= (1 << channel - 1);
+    _channelsEnabled |= (1 << (channel - 1));
   } else {
     _channelsEnabled = 0xFF;
   }
@@ -73,7 +73,7 @@ void E52246::disableChannel(uint8_t channel = 0)
   }
   uint8_t _channelsEnabled = readRegister8(SETUP_LED_ENABLE);
   if (channel) {
-    _channelsEnabled &= ~(1 << channel - 1);
+    _channelsEnabled &= ~(1 << (channel - 1));
   } else {
     _channelsEnabled = 0x00;
   }
@@ -202,11 +202,11 @@ uint8_t E52246::getErrStatus(uint8_t channel)
   }
   uint16_t _errFlag = readRegister16(LED_STATUS);
   // test for open condition first
-  if (_errFlag & 1 << channel - 1) {
+  if (_errFlag & 1 << (channel - 1)) {
     return 2;
   }
   // test for short condition
-  if (_errFlag & 1 << channel + 7) {
+  if (_errFlag & 1 << (channel + 7)) {
     return 1;
   }
   return 0;
@@ -250,7 +250,7 @@ uint16_t E52246::readRegister16(uint8_t reg)
 
 // Write to E2PROM. The E2PROM programming/erasing voltage must be externally provided via the ADIM pin.
 
-uint8_t E52246::writeEEPROM()
+void E52246::writeEEPROM()
 {
   Wire.beginTransmission(_addr);
   Wire.write(EE_PROG);

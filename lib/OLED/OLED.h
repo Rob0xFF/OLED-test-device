@@ -77,9 +77,9 @@ class OLED
   private:
 
     TCA9548A & _TCAMain;
-    TCA9548A & _TCAHead;
     E52246 & _OLEDDriver;
     INA226 & _INA226;
+    TCA9548A & _TCAHead;
     AS_BH1750 & _BH;
     uint8_t _e52246_tca_pin;
     uint8_t _e52246_pin_mask;

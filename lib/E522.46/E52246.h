@@ -166,12 +166,11 @@ class E52246
       */
     uint8_t getErrStatus(uint8_t channel);
 
-    void writeRegister8(uint8_t reg, uint8_t data);
-    uint8_t writeEEPROM();
-
   private:
     uint8_t _addr;
     uint8_t _runPin = -1;
+    void writeRegister8(uint8_t reg, uint8_t data);
+    void writeEEPROM();
     uint8_t readRegister8(uint8_t reg);
     uint16_t readRegister16(uint8_t reg);
 };

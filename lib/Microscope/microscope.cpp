@@ -77,8 +77,8 @@ uint8_t Microscope::stopVideoCapture(void)
         }
       }
     } while (millis() - startMillis < serialTimeout);
-    return 0;
   }
+  return 0;
 }
 
 uint8_t Microscope::playback(void)
