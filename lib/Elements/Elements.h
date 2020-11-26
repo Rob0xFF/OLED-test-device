@@ -98,17 +98,17 @@ class rButton
 
   private:
 
+    const float setPointMin;
+    const float setPointMax;
+    const float _increment;
+    const char * _unit;
+    const char * _format;
     const int16_t _myX;
     const int16_t _myY;
     const int16_t _myWidth;
     const int16_t _myHeight;
-
-    const float setPointMin;
-    const float setPointMax;
-    const float _increment;
     const uint8_t _myDir;
-    const char * _unit;
-    const char * _format;
+
     char _caption[10];
     uint8_t _textWidth;
 
@@ -130,12 +130,12 @@ class pButton
 
   private:
 
+    const char * _caption;
     const int16_t _myX;
     const int16_t _myY;
     const int16_t _myWidth;
     const int16_t _myHeight;
     const uint16_t _myColor;
-    const char * _caption;
 
 };
 
@@ -151,11 +151,11 @@ class TextBox
 
   private:
 
+    const char * _caption;
     const int16_t _myX;
     const int16_t _myY;
     const int16_t _myWidth;
     const int16_t _myHeight;
-    const char * _caption;
 
 };
 
@@ -181,12 +181,12 @@ class sButton
 
   private:
 
+    const char * _caption;
     const int16_t _myX;
     const int16_t _myY;
     const int16_t _myWidth;
     const int16_t _myHeight;
     const uint16_t _myColor;
-    const char * _caption;
 
 };
 
@@ -212,12 +212,12 @@ class OLEDSelector
 
   private:
 
+    uint8_t _myPositions;
     int16_t _myX;
     int16_t _myY;
     int16_t _myWidth;
     int16_t _myHeight;
     uint16_t _myColor;
-    uint8_t _myPositions;
 
 };
 

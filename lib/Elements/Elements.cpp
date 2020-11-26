@@ -126,7 +126,6 @@ uint8_t rButton::touched(int16_t x, int16_t y)
         return 2; // -
       }
     }
-    return 0;
   }
   if (_myDir == 1) {
     if ((y > _myY) && (y < _myY + _myHeight)) {
@@ -137,8 +136,8 @@ uint8_t rButton::touched(int16_t x, int16_t y)
         return 1; // +
       }
     }
-    return 0;
   }
+  return 0;
 }
 
 void rButton::touchHandle(uint8_t dir)
