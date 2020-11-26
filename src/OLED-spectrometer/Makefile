@@ -14,7 +14,7 @@ ARDUINO_LIBS = C12880 3rdParty/ElapsedMillis
 
 OPTIMIZATION_LEVEL = s
 
-MONITOR_PORT      = /dev/ttyACM0
+MONITOR_PORT      = /dev/cu.usbmodem*
 
 MONITOR_BAUDRATE  = 115200
 
