@@ -413,6 +413,9 @@ void Spectrum::update(void)
         board.writeToLog(F(", t(integ) = "));
         board.writeToLog(iTButton.setPoint);
         board.writeToLog(F("ms"));
+        board.writeToLog(F(", n(average) = "));
+        board.writeToLog(averagingButton.setPoint);
+        board.writeToLog(F("x"));
         board.writeToLog(F("\n\nlambda[nm] intensity[a.u.]\n"));
         diagram.clear();
         board.spectrometer -> setAveraging((uint8_t) averagingButton.setPoint);
