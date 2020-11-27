@@ -257,7 +257,7 @@ class WHZLogo
 {
   public:
 
-    WHZLogo(Board & myBoard, int16_t x, int16_t y, int16_t width, int16_t height): board(myBoard), _myX(x), _myY(y), _myWidth(width), _myHeight(height) {};
+    WHZLogo(Board & myBoard, int16_t x, int16_t y): board(myBoard), _myX(x), _myY(y) {};
 
     void show(void);
 
@@ -267,8 +267,6 @@ class WHZLogo
 
     int16_t _myX;
     int16_t _myY;
-    int16_t _myWidth;
-    int16_t _myHeight;
 };
 
 #endif

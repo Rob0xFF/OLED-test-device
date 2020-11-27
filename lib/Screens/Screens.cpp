@@ -2,7 +2,6 @@
 
 void ScreenHeader::show(void)
 {
-  board.TFT.fillRect(0, 0, board.TFT.width(), 15, TFT_GRAY);
   //board.TFT.drawRect(0, 0, board.TFT.width(), board.TFT.height(), TFT_GRAY);
   board.TFT.setTextSize(1);
   board.TFT.setTextColor(TFT_WHITE, TFT_GRAY);
@@ -140,10 +139,12 @@ MainMenu::~MainMenu()
 
 void MainMenu::show(void)
 {
+  modeBox.show();
   menuEntry1.show();
   menuEntry2.show();
   menuEntry3.show();
   menuEntry4.show();
+	setupBox.show();
   menuEntry5.show();
   menuEntry6.show();
 }

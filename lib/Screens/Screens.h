@@ -28,18 +28,32 @@
 #define TFT_GREEN 0x9DAA
 #define TFT_RED 0xD9E2
 
-#define TOP_MARGIN 15
-#define TOP_MARGIN6 20
-#define GRID6_INTERSPACE 6
-#define GRID6 33
-#define GRID5_INTERSPACE 5
-#define GRID5 42
-#define GRID4_INTERSPACE 8
-#define GRID4 50
+#define TOP_MARGIN 10
+#define GRIDX 50
+#define GRIDX_INTERSPACE 8
+#define GRIDY 36
+#define GRIDY_INTERSPACE 6
+
 #define GRID3_INTERSPACE 10
 #define GRID3 68
 #define HOR 1
 #define VERT 2
+
+static uint16_t xCoord(uint8_t x){
+	return x * GRIDX_INTERSPACE + (x - 1) * GRIDX;
+}
+
+static uint16_t xWidth(uint8_t w){
+	return (w - 1) * GRIDX_INTERSPACE + w * GRIDX;
+}
+
+static uint16_t yCoord(uint8_t y){
+	return TOP_MARGIN + y * GRIDY_INTERSPACE + (y - 1) * GRIDY;
+}
+
+static uint16_t yHeight(uint8_t h){
+	return (h - 1) * GRIDY_INTERSPACE + h * GRIDY;
+}
 
 class ScreenHeader
 {
@@ -78,17 +92,21 @@ class MainMenu
 
     Board & board;
 
-    pButton menuEntry1 = pButton(board, "Quick Test", GRID4_INTERSPACE, TOP_MARGIN + GRID4_INTERSPACE, GRID4_INTERSPACE + 2 * GRID4, GRID4_INTERSPACE + 2 * GRID4, TFT_OLIVE);
+    TextBox modeBox = TextBox(board, "Mode", xCoord(1), yCoord(1), xWidth(4), yHeight(1));
 
-    pButton menuEntry2 = pButton(board, "I-V Curve", 3 * GRID4_INTERSPACE + 2 * GRID4, TOP_MARGIN + GRID4_INTERSPACE, GRID4_INTERSPACE + 2 * GRID4, GRID4_INTERSPACE + 2 * GRID4, TFT_OLIVE);
+    pButton menuEntry1 = pButton(board, "Quick Test", xCoord(1), yCoord(2), xWidth(2), yHeight(2), TFT_OLIVE);
 
-    pButton menuEntry3 = pButton(board, "Spectrum", GRID4_INTERSPACE, TOP_MARGIN + 3 * GRID4_INTERSPACE + 2 * GRID4, GRID4_INTERSPACE + 2 * GRID4, GRID4_INTERSPACE + 2 * GRID4, TFT_OLIVE);
+    pButton menuEntry2 = pButton(board, "I-V Curve", xCoord(3), yCoord(2), xWidth(2), yHeight(2), TFT_OLIVE);
 
-    pButton menuEntry4 = pButton(board, "Angular Scan", 3 * GRID4_INTERSPACE + 2 * GRID4, TOP_MARGIN + 3 * GRID4_INTERSPACE + 2 * GRID4, GRID4_INTERSPACE + 2 * GRID4, GRID4_INTERSPACE + 2 * GRID4, TFT_OLIVE);
+    pButton menuEntry3 = pButton(board, "Spectrum", xCoord(1), yCoord(4), xWidth(2), yHeight(2), TFT_OLIVE);
 
-    pButton menuEntry5 = pButton(board, "Set Clock", GRID4_INTERSPACE, TOP_MARGIN + 5 * GRID4_INTERSPACE + 4 * GRID4, GRID4_INTERSPACE + 2 * GRID4, GRID4,  TFT_OLIVE);
+    pButton menuEntry4 = pButton(board, "Angular Scan", xCoord(3), yCoord(4), xWidth(2), yHeight(2), TFT_OLIVE);
 
-    pButton menuEntry6 = pButton(board, "Info", 3 * GRID4_INTERSPACE + 2 * GRID4, TOP_MARGIN + 5 * GRID4_INTERSPACE + 4 * GRID4, GRID4_INTERSPACE + 2 * GRID4, GRID4,  TFT_OLIVE);
+    TextBox setupBox = TextBox(board, "Setup", xCoord(1), yCoord(6), xWidth(4), yHeight(1));
+
+    pButton menuEntry5 = pButton(board, "Set Clock", xCoord(1), yCoord(7), xWidth(2), yHeight(1),  TFT_OLIVE);
+
+    pButton menuEntry6 = pButton(board, "Info", xCoord(3), yCoord(7), xWidth(2), yHeight(1),  TFT_OLIVE);
 
   private:
 
@@ -111,26 +129,25 @@ class QuickTest
     OLEDButton Button[6] =
 
     {
-      OLEDButton(board, board._Pixel[0].pixel, GRID4_INTERSPACE, TOP_MARGIN + GRID4_INTERSPACE, GRID3, GRID3, 1),
-      OLEDButton(board, board._Pixel[1].pixel, GRID4_INTERSPACE + GRID3 + GRID3_INTERSPACE, TOP_MARGIN + GRID4_INTERSPACE, GRID3, GRID3, 2),
-      OLEDButton(board, board._Pixel[2].pixel, GRID4_INTERSPACE + 2 * GRID3 +  2 * GRID3_INTERSPACE, TOP_MARGIN + GRID4_INTERSPACE, GRID3, GRID3, 3),
-      OLEDButton(board, board._Pixel[3].pixel, GRID4_INTERSPACE, TOP_MARGIN + GRID4_INTERSPACE + GRID3 + GRID3_INTERSPACE, GRID3, GRID3, 4),
-      OLEDButton(board, board._Pixel[4].pixel, GRID4_INTERSPACE + GRID3 + GRID3_INTERSPACE, TOP_MARGIN + GRID4_INTERSPACE + GRID3 + GRID3_INTERSPACE, GRID3, GRID3, 5),
-      OLEDButton(board, board._Pixel[5].pixel, GRID4_INTERSPACE + 2 * GRID3 +  2 * GRID3_INTERSPACE, TOP_MARGIN + GRID4_INTERSPACE + GRID3 + GRID3_INTERSPACE, GRID3, GRID3, 6)
+      OLEDButton(board, board._Pixel[0].pixel, xCoord(1), yCoord(1), GRID3, yHeight(2), 1),
+      OLEDButton(board, board._Pixel[1].pixel, xCoord(1) + GRID3 + GRID3_INTERSPACE, yCoord(1), GRID3, yHeight(2), 2),
+      OLEDButton(board, board._Pixel[2].pixel, xCoord(1) + 2 * GRID3 +  2 * GRID3_INTERSPACE, yCoord(1), GRID3, yHeight(2), 3),
+      OLEDButton(board, board._Pixel[3].pixel, xCoord(1), yCoord(3), GRID3, yHeight(2), 4),
+      OLEDButton(board, board._Pixel[4].pixel, xCoord(1) + GRID3 + GRID3_INTERSPACE, yCoord(3), GRID3, yHeight(2), 5),
+      OLEDButton(board, board._Pixel[5].pixel, xCoord(1) + 2 * GRID3 +  2 * GRID3_INTERSPACE, yCoord(3), GRID3, yHeight(2), 6)
     };
 
+    rButton sPButton = rButton(board, 1.0, 79.5, 0.5, "mA", "%1.1f%s", xCoord(1), yCoord(6), xWidth(2), yHeight(1), HOR);
 
-    pButton startButton = pButton(board, "Start", 2 * GRID4_INTERSPACE + GRID4, TOP_MARGIN + 5 * GRID4_INTERSPACE + 4 * GRID4, GRID4_INTERSPACE + 2 * GRID4, GRID4, TFT_GREEN);
+    sButton lifeTimeButton = sButton(board, "LifeTime", xCoord(3), yCoord(6), xWidth(2), yHeight(1), TFT_OLIVE);
 
-    pButton stopButton = pButton(board, "Stop", 2 * GRID4_INTERSPACE + GRID4, TOP_MARGIN + 5 * GRID4_INTERSPACE + 4 * GRID4, GRID4_INTERSPACE + 2 * GRID4, GRID4, TFT_RED);
+    OLEDSelector selector = OLEDSelector(board, 7, xCoord(1), yCoord(7), xWidth(1), yHeight(1), TFT_OLIVE);
 
-    pButton exitButton = pButton(board, "EXIT->", 4 * GRID4_INTERSPACE + 3 * GRID4, TOP_MARGIN + 5 * GRID4_INTERSPACE + 4 * GRID4, GRID4, GRID4, TFT_RED);
+    pButton startButton = pButton(board, "Start", xCoord(2), yCoord(7), xWidth(2), yHeight(1), TFT_GREEN);
 
-    sButton lifeTimeButton = sButton(board, "LifeTime", 3 * GRID4_INTERSPACE + 2 * GRID4, TOP_MARGIN + 4 * GRID4_INTERSPACE + 3 * GRID4, GRID4_INTERSPACE + 2 * GRID4, GRID4, TFT_OLIVE);
+    pButton stopButton = pButton(board, "Stop", xCoord(2), yCoord(7), xWidth(2), yHeight(1), TFT_RED);
 
-    rButton sPButton = rButton(board, 1.0, 79.5, 0.5, "mA", "%1.1f%s", GRID4_INTERSPACE, TOP_MARGIN + 4 * GRID4_INTERSPACE + 3 * GRID4, GRID4_INTERSPACE + 2 * GRID4,  GRID4, HOR);
-
-    OLEDSelector selector = OLEDSelector(board, 7, GRID4_INTERSPACE, TOP_MARGIN + 5 * GRID4_INTERSPACE + 4 * GRID4, GRID4, GRID4, TFT_OLIVE);
+    pButton exitButton = pButton(board, "EXIT->", xCoord(4), yCoord(7), xWidth(1), yHeight(1), TFT_RED);
 
     uint8_t isLifeTime = 0;
 
@@ -156,19 +173,19 @@ class Characteristic
 
     Board & board;
 
-    XYDiagram diagram = XYDiagram(board, "I[mA]", "U[V]", "Ev[Lux]", GRID4_INTERSPACE, TOP_MARGIN + GRID4_INTERSPACE, 3 * GRID4_INTERSPACE + 4 * GRID4, 2 * GRID4_INTERSPACE + 3 * GRID4);
+    XYDiagram diagram = XYDiagram(board, "I[mA]", "U[V]", "Ev[Lux]", xCoord(1), yCoord(1), xWidth(4), yHeight(4));
 
-    pButton exitButton = pButton(board, "EXIT->", 4 * GRID4_INTERSPACE + 3 * GRID4, TOP_MARGIN + 5 * GRID4_INTERSPACE + 4 * GRID4, GRID4, GRID4, TFT_RED);
+    rButton minButton = rButton(board, 1.0, 79.0, 0.5, "mA", "%1.1f%s", xCoord(1), yCoord(6), xWidth(2), yHeight(1), HOR);
 
-    pButton startButton = pButton(board, "Start", 2 * GRID4_INTERSPACE +  GRID4, TOP_MARGIN + 5 * GRID4_INTERSPACE + 4 * GRID4, GRID4_INTERSPACE + 2 * GRID4, GRID4, TFT_GREEN);
+    rButton maxButton = rButton(board, 1.5, 79.5, 0.5, "mA", "%1.1f%s", xCoord(3), yCoord(6), xWidth(2), yHeight(1), HOR);
 
-    pButton stopButton = pButton(board, "Stop", 2 * GRID4_INTERSPACE +  GRID4, TOP_MARGIN + 5 * GRID4_INTERSPACE + 4 * GRID4, GRID4_INTERSPACE + 2 * GRID4, GRID4, TFT_RED);
+    OLEDSelector selector = OLEDSelector(board, 6, xCoord(1), yCoord(7), xWidth(1), yHeight(1), TFT_OLIVE);
 
-    rButton minButton = rButton(board, 1.0, 79.0, 0.5, "mA", "%1.1f%s", GRID4_INTERSPACE, TOP_MARGIN + 4 * GRID4_INTERSPACE + 3 * GRID4, GRID4_INTERSPACE + 2 * GRID4,  GRID4, HOR);
+    pButton startButton = pButton(board, "Start", xCoord(2), yCoord(7), xWidth(2), yHeight(1), TFT_GREEN);
 
-    rButton maxButton = rButton(board, 1.5, 79.5, 0.5, "mA", "%1.1f%s", 3 * GRID4_INTERSPACE + 2 * GRID4, TOP_MARGIN + 4 * GRID4_INTERSPACE + 3 * GRID4, GRID4_INTERSPACE + 2 * GRID4, GRID4, HOR);
+    pButton stopButton = pButton(board, "Stop", xCoord(2), yCoord(7), xWidth(2), yHeight(1), TFT_RED);
 
-    OLEDSelector selector = OLEDSelector(board, 6, GRID4_INTERSPACE, TOP_MARGIN + 5 * GRID4_INTERSPACE + 4 * GRID4, GRID4, GRID4, TFT_OLIVE);
+    pButton exitButton = pButton(board, "EXIT->", xCoord(4), yCoord(7), xWidth(1), yHeight(1), TFT_RED);
 
     float current;
 
@@ -200,21 +217,21 @@ class Spectrum
 
     Board & board;
 
-    XYDiagram diagram = XYDiagram(board, "l[nm]", "I[a.u.]", " ", GRID4_INTERSPACE, TOP_MARGIN6 + GRID6_INTERSPACE, 3 * GRID4_INTERSPACE + 4 * GRID4, 3 * GRID6_INTERSPACE + 4 * GRID6);
+    XYDiagram diagram = XYDiagram(board, "l[nm]", "I[a.u.]", " ", xCoord(1), yCoord(1), xWidth(4), yHeight(4));
 
-    pButton captureButton = pButton(board, "Capture", 2 * GRID4_INTERSPACE + GRID4, TOP_MARGIN6 + 7 * GRID6_INTERSPACE + 6 * GRID6, 1 * GRID4_INTERSPACE + 2 * GRID4, GRID6, TFT_GREEN);
+    rButton sPButton = rButton(board, 1.0, 79.5, 0.5, "mA", "%1.1f%s", xCoord(1), yCoord(5), xWidth(4), yHeight(1), HOR);
 
-    pButton stopButton = pButton(board, "Stop", 2 * GRID4_INTERSPACE + GRID4, TOP_MARGIN6 + 7 * GRID6_INTERSPACE + 6 * GRID6, 1 * GRID4_INTERSPACE + 2 * GRID4, GRID6, TFT_RED);
+    rButton iTButton = rButton(board, 5, 99995, 5, "ms", "%1.0f%s", xCoord(1), yCoord(6), xWidth(2), yHeight(1), HOR);
 
-    pButton exitButton = pButton(board, "->", 4 * GRID4_INTERSPACE + 3 * GRID4, TOP_MARGIN6 + 7 * GRID6_INTERSPACE + 6 * GRID6, GRID4, GRID6, TFT_RED);
+    rButton averagingButton = rButton(board, 1, 60, 1, "x", "%1.0f%s", xCoord(3), yCoord(6), xWidth(2), yHeight(1), HOR);
 
-    rButton averagingButton = rButton(board, 1, 60, 1, "x", "%1.0f%s", 3 * GRID4_INTERSPACE + 2 * GRID4, TOP_MARGIN6 + 5 * GRID6_INTERSPACE + 4 * GRID6, GRID4_INTERSPACE + 2 * GRID4, GRID6, HOR);
+    OLEDSelector selector = OLEDSelector(board, 6, xCoord(1), yCoord(7), xWidth(1), yHeight(1), TFT_OLIVE);
 
-    rButton sPButton = rButton(board, 1.0, 79.5, 0.5, "mA", "%1.1f%s", GRID4_INTERSPACE, TOP_MARGIN6 + 6 * GRID6_INTERSPACE + 5 * GRID6, GRID4_INTERSPACE + 2 * GRID4,  GRID6, HOR);
+    pButton captureButton = pButton(board, "Capture", xCoord(2), yCoord(7), xWidth(2), yHeight(1), TFT_GREEN);
 
-    rButton iTButton = rButton(board, 5, 99995, 5, "ms", "%1.0f%s", 3 * GRID4_INTERSPACE + 2 * GRID4, TOP_MARGIN6 + 6 * GRID6_INTERSPACE + 5 * GRID6, GRID4_INTERSPACE + 2 * GRID4,  GRID6, HOR);
+    pButton stopButton = pButton(board, "Stop", xCoord(2), yCoord(7), xWidth(2), yHeight(1), TFT_RED);
 
-    OLEDSelector selector = OLEDSelector(board, 6, GRID4_INTERSPACE, TOP_MARGIN6 + 7 * GRID6_INTERSPACE + 6 * GRID6, GRID4, GRID6, TFT_OLIVE);
+    pButton exitButton = pButton(board, "Exit->", xCoord(4), yCoord(7), xWidth(1), yHeight(1), TFT_RED);
 
     uint8_t measuring = 0;
     uint8_t measurementPhase = 0;
@@ -235,9 +252,9 @@ class AngleScan
 
     Board & board;
 
-    pButton startButton = pButton(board, "Start", 2 * GRID4_INTERSPACE + GRID4, TOP_MARGIN + 5 * GRID4_INTERSPACE + 4 * GRID4, GRID4_INTERSPACE + 2 * GRID4, GRID4, TFT_GREEN);
+    pButton startButton = pButton(board, "Start", xCoord(2), yCoord(7), xWidth(2), yHeight(1), TFT_GREEN);
 
-    pButton exitButton = pButton(board, "EXIT->", 4 * GRID4_INTERSPACE + 3 * GRID4, TOP_MARGIN + 5 * GRID4_INTERSPACE + 4 * GRID4, GRID4, GRID4, TFT_RED);
+    pButton exitButton = pButton(board, "EXIT->", xCoord(4), yCoord(7), xWidth(1), yHeight(1), TFT_RED);
 
   private:
 
@@ -255,25 +272,25 @@ class ClockSet
 
     Board & board;
 
-    rButton hourButton = rButton(board, 0, 23, 1, "h", "%02.0f%s", GRID4_INTERSPACE, TOP_MARGIN + GRID4_INTERSPACE, GRID4, GRID4_INTERSPACE + 2 * GRID4, VERT);
+    TextBox text1 = TextBox(board, "hh:mm:ss", xCoord(1), yCoord(1), xWidth(1), yHeight(3));
 
-    rButton minuteButton = rButton(board, 0, 59, 1, "m", "%02.0f%s", 2 * GRID4_INTERSPACE + GRID4, TOP_MARGIN + GRID4_INTERSPACE, GRID4, GRID4_INTERSPACE + 2 * GRID4, VERT);
+    rButton hourButton = rButton(board, 0, 23, 1, "h", "%02.0f%s", xCoord(2), yCoord(1), xWidth(1), yHeight(3), VERT);
 
-    rButton secondButton = rButton(board, 0, 59, 1, "s", "%02.0f%s", 3 * GRID4_INTERSPACE + 2 * GRID4, TOP_MARGIN + GRID4_INTERSPACE, GRID4, GRID4_INTERSPACE + 2 * GRID4, VERT);
+    rButton minuteButton = rButton(board, 0, 59, 1, "m", "%02.0f%s", xCoord(3), yCoord(1), xWidth(1), yHeight(3), VERT);
 
-    rButton yearButton = rButton(board, 20, 99, 1, "", "%02.0f%s", GRID4_INTERSPACE, TOP_MARGIN + 3 * GRID4_INTERSPACE + 2 * GRID4, GRID4, GRID4_INTERSPACE + 2 * GRID4, VERT);
+    rButton secondButton = rButton(board, 0, 59, 1, "s", "%02.0f%s", xCoord(4), yCoord(1), xWidth(1), yHeight(3), VERT);
 
-    rButton monthButton = rButton(board, 1, 12, 1, "", "%02.0f%s", 2 * GRID4_INTERSPACE + GRID4, TOP_MARGIN + 3 * GRID4_INTERSPACE + 2 * GRID4, GRID4, GRID4_INTERSPACE + 2 * GRID4, VERT);
+    TextBox text2 = TextBox(board, "YY:MM:DD", xCoord(1), yCoord(4), xWidth(1), yHeight(3));
 
-    rButton dayButton = rButton(board, 1, 31, 1, "", "%02.0f%s", 3 * GRID4_INTERSPACE + 2 * GRID4, TOP_MARGIN + 3 * GRID4_INTERSPACE + 2 * GRID4, GRID4, GRID4_INTERSPACE + 2 * GRID4, VERT);
+    rButton yearButton = rButton(board, 20, 99, 1, "", "%02.0f%s", xCoord(2), yCoord(4), xWidth(1), yHeight(3), VERT);
 
-    TextBox text1 = TextBox(board, "hh:mm:ss", 4 * GRID4_INTERSPACE + 3 * GRID4, TOP_MARGIN + GRID4_INTERSPACE, GRID4, GRID4_INTERSPACE + 2 * GRID4);
+    rButton monthButton = rButton(board, 1, 12, 1, "", "%02.0f%s", xCoord(3), yCoord(4), xWidth(1), yHeight(3), VERT);
 
-    TextBox text2 = TextBox(board, "YY:MM:DD", 4 * GRID4_INTERSPACE + 3 * GRID4, TOP_MARGIN + 3 * GRID4_INTERSPACE + 2 * GRID4, GRID4, GRID4_INTERSPACE + 2 * GRID4);
+    rButton dayButton = rButton(board, 1, 31, 1, "", "%02.0f%s", xCoord(4), yCoord(4), xWidth(1), yHeight(3), VERT);
 
-    pButton setButton = pButton(board, "Set", GRID4_INTERSPACE, TOP_MARGIN + 5 * GRID4_INTERSPACE + 4 * GRID4, 2 * GRID4_INTERSPACE + 3 * GRID4, GRID4, TFT_GREEN);
+    pButton setButton = pButton(board, "Set", xCoord(2), yCoord(7), xWidth(2), yHeight(1), TFT_GREEN);
 
-    pButton exitButton = pButton(board, "EXIT->", 4 * GRID4_INTERSPACE + 3 * GRID4, TOP_MARGIN + 5 * GRID4_INTERSPACE + 4 * GRID4, GRID4, GRID4, TFT_RED);
+    pButton exitButton = pButton(board, "EXIT->", xCoord(4), yCoord(7), xWidth(1), yHeight(1), TFT_RED);
 
   private:
 
@@ -291,13 +308,13 @@ class Info
 
     Board & board;
 
-    TextBox above = TextBox(board, "OLED Test Device", GRID4_INTERSPACE, TOP_MARGIN + GRID4_INTERSPACE, 3 * GRID4_INTERSPACE + 4 * GRID4, GRID4);
+    TextBox above = TextBox(board, "OLED Test Device", xCoord(1), yCoord(1), xWidth(4), yHeight(2));
 
-    WHZLogo logo = WHZLogo(board, 2 * GRID4_INTERSPACE + GRID4, TOP_MARGIN + 2 * GRID4_INTERSPACE + GRID4, GRID4_INTERSPACE + 2 * GRID4, GRID4_INTERSPACE + 2 * GRID4);
+    WHZLogo logo = WHZLogo(board, xCoord(2), yCoord(3));
 
-    TextBox below = TextBox(board, "2020 AG Nano (WHZ)", GRID4_INTERSPACE, TOP_MARGIN + 4 * GRID4_INTERSPACE + 3 * GRID4, 3 * GRID4_INTERSPACE + 4 * GRID4, GRID4);
+    TextBox below = TextBox(board, "2020 AG Nano (WHZ)", xCoord(1), yCoord(6), xWidth(4), yHeight(1));
 
-    pButton exitButton = pButton(board, "EXIT->", 2 * GRID4_INTERSPACE + 1 * GRID4, TOP_MARGIN + 5 * GRID4_INTERSPACE + 4 * GRID4, GRID4_INTERSPACE + 2 * GRID4, GRID4, TFT_RED);
+    pButton exitButton = pButton(board, "EXIT->", xCoord(2), yCoord(7), xWidth(2), yHeight(1), TFT_RED);
 
   private:
 
