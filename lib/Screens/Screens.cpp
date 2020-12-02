@@ -164,7 +164,9 @@ void QuickTest::show(void)
     Button[i].show();
   }
   sPButton.setPoint = 1;
+  timeButton.setPoint = 10;
   sPButton.show();
+	timeButton.show();
   exitButton.show();
   startButton.show();
   selector.show();
@@ -183,10 +185,10 @@ void QuickTest::update(void)
   for (uint8_t i = 0; i < 6; i++) {
     Button[i].update();
   }
-  if (measurementPending > 0 && measurementPending < 31) {
+  if (measurementPending > 0 && measurementPending < (uint8_t) timeButton.setPoint + 1) {
     measurementPending ++;
   }
-  if (measurementPending == 31) {
+  if (measurementPending == (uint8_t) timeButton.setPoint + 1) {
     if ((board.isAvailable(MICROSCOPE1) || board.isAvailable(MICROSCOPE2)) && board.microscope != nullptr) {
       board.microscope->capture();
     }

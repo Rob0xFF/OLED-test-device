@@ -119,6 +119,10 @@ void GUI::updateTouch()
       quickTest -> sPButton.touchHandle(quickTest -> sPButton.touched(TouchX, TouchY));
       return;
     }
+    if (quickTest -> timeButton.touched(TouchX, TouchY) && quickTest -> measurementPending == 0) {
+      quickTest -> timeButton.touchHandle(quickTest -> timeButton.touched(TouchX, TouchY));
+      return;
+    }
     if (quickTest -> exitButton.touched(TouchX, TouchY) && quickTest -> measurementPending == 0) {
       quickTest -> ~QuickTest();
       currentScreen = 0;
@@ -153,7 +157,7 @@ void GUI::updateTouch()
         quickTest -> Button[4].update();
         quickTest -> Button[5].update();
       }
-      quickTest -> measurementPending = 28;
+      quickTest -> measurementPending = quickTest -> timeButton.setPoint - 2;
       quickTest -> startButton.hide();
       quickTest -> stopButton.show();
       return;

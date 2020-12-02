@@ -137,7 +137,9 @@ class QuickTest
       OLEDButton(board, board._Pixel[5].pixel, xCoord(1) + 2 * GRID3 +  2 * GRID3_INTERSPACE, yCoord(3), GRID3, yHeight(2), 6)
     };
 
-    rButton sPButton = rButton(board, 1.0, 79.5, 0.5, "mA", "%1.1f%s", xCoord(1), yCoord(6), xWidth(2), yHeight(1), HOR);
+		rButton sPButton = rButton(board, 1.0, 79.5, 0.5, "mA", "%1.1f%s", xCoord(1), yCoord(5), xWidth(4), yHeight(1), HOR);
+
+    rButton timeButton = rButton(board, 5.0, 60.0, 5, "s", "%1.0f%s", xCoord(1), yCoord(6), xWidth(2), yHeight(1), HOR);
 
     sButton lifeTimeButton = sButton(board, "LifeTime", xCoord(3), yCoord(6), xWidth(2), yHeight(1), TFT_OLIVE);
 
