@@ -68,11 +68,11 @@ class OLED
     uint8_t updateErrStatus(void);
 
     uint8_t availChannels;
-    float current;
-    float voltage;
-    float illuminance;
-    uint8_t errStatus;
-    uint8_t active;
+    volatile float current;
+    volatile float voltage;
+    volatile float illuminance;
+    volatile uint8_t errStatus;
+    volatile uint8_t active;
 
   private:
 
@@ -81,10 +81,10 @@ class OLED
     INA226 & _INA226;
     TCA9548A & _TCAHead;
     AS_BH1750 & _BH;
-    uint8_t _e52246_tca_pin;
-    uint8_t _e52246_pin_mask;
-    uint8_t _ina226_tca_pin;
-    uint8_t _bh_tca_pin;
+    const uint8_t _e52246_tca_pin;
+    const uint8_t _e52246_pin_mask;
+    const uint8_t _ina226_tca_pin;
+    const uint8_t _bh_tca_pin;
 
 };
 

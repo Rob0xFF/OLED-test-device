@@ -58,11 +58,11 @@ int main(void)
   myGUI.boot();
   // interupt on touchscreen event
   pinMode(FT6206_IRQ_PIN, INPUT);
-  //attachInterrupt(FT6206_INT, tsTouched, FALLING);
   attachInterrupt(FT6206_INT, tsTouched, FALLING);
   // interrupt on external 1Hz clock signal
   pinMode(DS3231_INT_PIN, INPUT);
   attachInterrupt(DS3231_INT, tickTock, FALLING);
+	// interrupt on internal timer each 10 millisecond
   Timer1.initialize(10000);
   Timer1.attachInterrupt(fastTickTock);
   for (;;) {

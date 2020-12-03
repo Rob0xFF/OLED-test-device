@@ -157,7 +157,7 @@ void GUI::updateTouch()
         quickTest -> Button[4].update();
         quickTest -> Button[5].update();
       }
-      quickTest -> measurementPending = quickTest -> timeButton.setPoint - 2;
+      quickTest -> measurementPending = (uint8_t) quickTest -> timeButton.setPoint - 2;
       quickTest -> startButton.hide();
       quickTest -> stopButton.show();
       return;
