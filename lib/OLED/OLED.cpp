@@ -138,6 +138,35 @@ uint8_t OLED::updateErrStatus(void)
   return errStatus;
 }
 
+void OLED::configOpenDetection(uint8_t level)
+{
+  _TCAMain.enableChannel(_e52246_tca_pin);
+	_OLEDDriver.configOpenDetection(level);
+  _TCAMain.disableChannel(_e52246_tca_pin);
+}
 
+void OLED::configShortDetection(uint8_t level)
+{
+  _TCAMain.enableChannel(_e52246_tca_pin);
+	_OLEDDriver.configShortDetection(level);
+  _TCAMain.disableChannel(_e52246_tca_pin);
+}
+
+
+float OLED::getConfigOpenDetection(void)
+{
+  _TCAMain.enableChannel(_e52246_tca_pin);
+	float retVal = _OLEDDriver.getConfigOpenDetection();
+  _TCAMain.disableChannel(_e52246_tca_pin);
+	return retVal;
+}
+
+float OLED::getConfigShortDetection(void)
+{
+  _TCAMain.enableChannel(_e52246_tca_pin);
+	float retVal = _OLEDDriver.getConfigShortDetection();
+  _TCAMain.disableChannel(_e52246_tca_pin);
+	return retVal;
+}
 
 

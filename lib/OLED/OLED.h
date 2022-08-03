@@ -67,6 +67,28 @@ class OLED
       */
     uint8_t updateErrStatus(void);
 
+    /*!
+      * @brief Configures plausibility check level for open detection
+    * @param [1:8] level (V_s = 33V * level / 256)
+      */
+    void configOpenDetection(uint8_t level);
+
+    /*!
+      * @brief Configures check level for short detection
+    * @param [1:8] level (V_s = 33V * level / 256)
+      */
+    void configShortDetection(uint8_t level);
+
+    /*!
+      * @brief get plausibility check level for open detection
+      */
+    float getConfigOpenDetection(void);
+
+    /*!
+      * @brief get check level for short detection
+      */
+    float getConfigShortDetection(void);
+
     uint8_t availChannels;
     volatile float current;
     volatile float voltage;

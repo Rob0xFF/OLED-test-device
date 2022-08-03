@@ -61,7 +61,7 @@ class XYDiagram
     float _myY2Min = 0;
     float _myY2Max = 0;
 
-    float dataPoint[16][3];
+    float dataPoint[50][3];
 
   private:
 

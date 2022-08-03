@@ -177,6 +177,8 @@ class Characteristic
 
     XYDiagram diagram = XYDiagram(board, "I[mA]", "U[V]", "Ev[Lux]", xCoord(1), yCoord(1), xWidth(4), yHeight(4));
 
+    rButton numButton = rButton(board, 5.0, 50.0, 1.0, "pts", "%1.0f%s", xCoord(1), yCoord(5), xWidth(4), yHeight(1), HOR);
+
     rButton minButton = rButton(board, 1.0, 79.0, 0.5, "mA", "%1.1f%s", xCoord(1), yCoord(6), xWidth(2), yHeight(1), HOR);
 
     rButton maxButton = rButton(board, 1.5, 79.5, 0.5, "mA", "%1.1f%s", xCoord(3), yCoord(6), xWidth(2), yHeight(1), HOR);
@@ -223,7 +225,7 @@ class Spectrum
 
     rButton sPButton = rButton(board, 1.0, 79.5, 0.5, "mA", "%1.1f%s", xCoord(1), yCoord(5), xWidth(4), yHeight(1), HOR);
 
-    rButton iTButton = rButton(board, 5, 99995, 5, "ms", "%1.0f%s", xCoord(1), yCoord(6), xWidth(2), yHeight(1), HOR);
+    rButton iTButton = rButton(board, 10, 99995, 10, "ms", "%1.0f%s", xCoord(1), yCoord(6), xWidth(2), yHeight(1), HOR);
 
     rButton averagingButton = rButton(board, 1, 60, 1, "x", "%1.0f%s", xCoord(3), yCoord(6), xWidth(2), yHeight(1), HOR);
 
@@ -310,13 +312,17 @@ class Info
 
     Board & board;
 
-    TextBox above = TextBox(board, "OLED Test Device", xCoord(1), yCoord(1), xWidth(4), yHeight(2));
+    TextBox above = TextBox(board, "OLED Test Device", xCoord(1), yCoord(1), xWidth(4), yHeight(1));
 
-    WHZLogo logo = WHZLogo(board, xCoord(2), yCoord(3));
+    WHZLogo logo = WHZLogo(board, xCoord(2), yCoord(2));
 
-    TextBox below = TextBox(board, "2020 AG Nano (WHZ)", xCoord(1), yCoord(6), xWidth(4), yHeight(1));
+    TextBox below = TextBox(board, "Driver Short / Open Threshold", xCoord(1), yCoord(5), xWidth(4), yHeight(1));
 
-    pButton exitButton = pButton(board, "EXIT->", xCoord(2), yCoord(7), xWidth(2), yHeight(1), TFT_RED);
+    rButton shortButton = rButton(board, 0, 33, 0.1, "V", "%1.1f%s", xCoord(1), yCoord(6), xWidth(2), yHeight(1), HOR);
+
+    rButton openButton = rButton(board, 0, 33, 0.1, "V", "%1.1f%s", xCoord(3), yCoord(6), xWidth(2), yHeight(1), HOR);
+
+    pButton exitButton = pButton(board, "EXIT->", xCoord(1), yCoord(7), xWidth(4), yHeight(1), TFT_RED);
 
   private:
 

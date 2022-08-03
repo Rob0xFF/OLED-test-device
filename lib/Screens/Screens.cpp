@@ -253,6 +253,8 @@ Characteristic::~Characteristic()
 
 void Characteristic::show(void)
 {
+  numButton.setPoint = 16;
+  numButton.show();
   minButton.setPoint = 1;
   minButton.show();
   maxButton.setPoint = 10;
@@ -290,7 +292,7 @@ void Characteristic::update()
         break;
       case 1:
         measurementPhase++;
-        current += (maxButton.setPoint - minButton.setPoint) / 16.0;
+        current += (maxButton.setPoint - minButton.setPoint) / numButton.setPoint;
         break;
       case 2:
         measurementPhase++;
@@ -365,7 +367,7 @@ void Spectrum::show(void)
   averagingButton.show();
   sPButton.setPoint = 1;
   sPButton.show();
-  iTButton.setPoint = 100;
+  iTButton.setPoint = 500;
   iTButton.show();
   selector.show();
   selector.update();
@@ -495,8 +497,12 @@ Info::~Info()
 
 void Info::show(void)
 {
-  exitButton.show();
   above.show();
   below.show();
   logo.show();
+	shortButton.setPoint = board._Pixel[0].pixel.getConfigShortDetection();
+	shortButton.show();
+	openButton.setPoint = board._Pixel[0].pixel.getConfigOpenDetection();
+	openButton.show();
+  exitButton.show();
 }

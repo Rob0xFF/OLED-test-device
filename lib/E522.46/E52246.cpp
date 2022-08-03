@@ -212,6 +212,26 @@ uint8_t E52246::getErrStatus(uint8_t channel)
   return 0;
 }
 
+void E52246::configOpenDetection(uint8_t level)
+{
+	writeRegister8(VS_CHECK_LEVEL, level);
+}
+
+void E52246::configShortDetection(uint8_t level)
+{
+	writeRegister8(SHORT_LIM_ALL, level);
+}
+
+float E52246::getConfigOpenDetection(void)
+{
+	return 33.0 * (float) readRegister8(VS_CHECK_LEVEL) / 256.0;
+}
+
+float E52246::getConfigShortDetection(void)
+{
+	return 33.0 * (float) readRegister8(SHORT_LIM1) / 256.0;
+}
+
 // ********* End of user functions **********
 
 void E52246::writeRegister8(uint8_t reg, uint8_t data)

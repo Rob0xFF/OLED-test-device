@@ -17,7 +17,7 @@ void XYDiagram::show(void)
 void XYDiagram::addDatapoint(float x, float y1, float y2, uint8_t number)
 {
   if (number == 0) {
-    for (uint8_t i = 0; i < 16; i++) {
+    for (uint8_t i = 0; i < 50; i++) {
       for (uint8_t u = 0; u < 3; u++) {
         dataPoint[i][u] = (float) 0.0;
       }
@@ -74,7 +74,7 @@ void XYDiagram::clear(void)
 void XYDiagram::drawData(void)
 {
   clear();
-  for (uint8_t i = 0; i < 16; i++) {
+  for (uint8_t i = 0; i < 50; i++) {
     drawDataPoint(dataPoint[i][0], dataPoint[i][1], 1, 2);
     drawDataPoint(dataPoint[i][0], dataPoint[i][2], 2, 2);
   }

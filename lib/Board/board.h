@@ -239,15 +239,16 @@ class Board
       },
     };
 
-  private:
 
-    // create instances for the I2C multiplexers
-    TCA9548A TCAmain = TCA9548A(I2C_TCAMAIN);
-    TCA9548A TCAhead = TCA9548A(I2C_TCAHEAD);
+  private:
 
     // create instances for the OLED Drivers
     E52246 OLEDDriver1 = E52246(I2C_E52246_1, E52246_1_RUN);
     E52246 OLEDDriver2 = E52246(I2C_E52246_2, E52246_2_RUN);
+
+    // create instances for the I2C multiplexers
+    TCA9548A TCAmain = TCA9548A(I2C_TCAMAIN);
+    TCA9548A TCAhead = TCA9548A(I2C_TCAHEAD);
 
     // create instance for the environment monitor
     HIH6130 _myHIH = HIH6130(I2C_HIH6130);

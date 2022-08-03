@@ -209,6 +209,10 @@ void GUI::updateTouch()
       mainMenu -> show();
       return;
     }
+    if (characteristic -> numButton.touched(TouchX, TouchY) && characteristic -> measuring == 0) {
+      characteristic -> numButton.touchHandle(characteristic -> numButton.touched(TouchX, TouchY));
+      return;
+    }
     if (characteristic -> minButton.touched(TouchX, TouchY) && characteristic -> measuring == 0) {
       characteristic -> minButton.touchHandle(characteristic -> minButton.touched(TouchX, TouchY));
       return;
@@ -315,7 +319,19 @@ void GUI::updateTouch()
     }
   }
   if (currentScreen == 6 && info != nullptr) { // Info
+		if (info -> shortButton.touched(TouchX, TouchY)) {
+			info -> shortButton.touchHandle(info -> shortButton.touched(TouchX, TouchY));
+      return;		
+		}
+		if (info -> openButton.touched(TouchX, TouchY)) {
+			info -> openButton.touchHandle(info -> openButton.touched(TouchX, TouchY));
+      return;		
+		}
     if (info -> exitButton.touched(TouchX, TouchY)) {
+			board._Pixel[0].pixel.configShortDetection((uint8_t) (0.5 + 256.0 * info -> shortButton.setPoint / 33.0));
+			board._Pixel[3].pixel.configShortDetection((uint8_t) (0.5 + 256.0 * info -> shortButton.setPoint / 33.0));
+			board._Pixel[0].pixel.configOpenDetection((uint8_t) (0.5 + 256.0 * info -> openButton.setPoint / 33.0));
+			board._Pixel[3].pixel.configOpenDetection((uint8_t) (0.5 + 256.0 * info -> openButton.setPoint / 33.0));
       //mainMenu = new(memBuffer) MainMenu(board);
       info -> ~Info();
       currentScreen = 0;
